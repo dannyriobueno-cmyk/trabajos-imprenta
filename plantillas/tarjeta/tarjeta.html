@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Tarjeta de presentación</title>
+<link rel="stylesheet" href="../../herramientas/fuentes.css">
+<link rel="stylesheet" href="../../herramientas/base.css">
+<script src="../../herramientas/guias.js"></script>
+<style>
+  :root {
+    --tinta: #111827;
+    --papel: #ffffff;
+    --acento: #2563eb;
+    --suave: #6b7280;
+  }
+  body { gap: 1cm; grid-auto-flow: row; }
+
+  /* En una tarjeta la zona segura es más estrecha que en un volante: 4 mm
+     en 5.5 cm de alto ya es mucho, y el texto pegado al canto se ve barato. */
+  .pieza { --margen: 4mm; font-family: "Inter", sans-serif; color: var(--tinta); }
+
+  /* FRENTE */
+  .frente .fondo { background: var(--acento); }
+  .frente .seguro { display: grid; place-items: center; text-align: center; color: var(--papel); }
+  .frente .marca { font-family: "Archivo Black", sans-serif; font-size: 18pt; line-height: 1; }
+  .frente .lema { font-size: 7.5pt; letter-spacing: .14em; text-transform: uppercase; margin-top: 2mm; }
+
+  /* REVERSO */
+  .reverso .fondo { background: var(--papel); }
+  .reverso .seguro { display: flex; flex-direction: column; justify-content: space-between; }
+  .reverso .nombre { font-weight: 600; font-size: 11pt; }
+  .reverso .cargo { font-size: 7.5pt; color: var(--suave); margin-top: .5mm; }
+  .reverso .datos { font-size: 7.5pt; line-height: 1.55; }
+  .reverso .datos b { color: var(--acento); font-weight: 600; }
+</style>
+</head>
+<body>
+
+<!-- Cada .pieza se exporta por separado. data-nombre va en el nombre del archivo. -->
+<div class="pieza frente" data-nombre="frente" style="--ancho: 9cm; --alto: 5.5cm;">
+  <div class="fondo"></div>
+  <div class="seguro">
+    <div>
+      <p class="marca">MARCA</p>
+      <p class="lema">Lema corto del negocio</p>
+    </div>
+  </div>
+</div>
+
+<div class="pieza reverso" data-nombre="reverso" style="--ancho: 9cm; --alto: 5.5cm;">
+  <div class="fondo"></div>
+  <div class="seguro">
+    <div>
+      <p class="nombre">Nombre Apellido</p>
+      <p class="cargo">Cargo o servicio</p>
+    </div>
+    <div class="datos">
+      <b>T</b> 0414-000-0000<br>
+      <b>@</b> negocio<br>
+      <b>D</b> Dirección, ciudad
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,15 @@
+{
+  "name": "trabajos-imprenta",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Piezas impresas para clientes: diseño por código a medida real y exportación para imprenta.",
+  "scripts": {
+    "nuevo": "node herramientas/nuevo.mjs",
+    "exportar": "node herramientas/exportar.mjs",
+    "exportar:todo": "node herramientas/exportar.mjs --todo"
+  },
+  "dependencies": {
+    "puppeteer": "^24.10.0"
+  }
+}

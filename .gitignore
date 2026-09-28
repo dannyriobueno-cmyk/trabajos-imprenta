@@ -1,0 +1,19 @@
+node_modules/
+.DS_Store
+
+# Lo exportado se regenera con `npm run exportar`: se versiona la receta, no
+# los PDF/PNG, que pesan y cambian con cada retoque.
+salida/
+
+# Fotos y logos que manda el cliente. Pueden pesar cientos de MB y no son
+# nuestros para subir a GitHub. Van en una carpeta `material/` dentro de cada
+# trabajo y se guardan aparte (Drive, disco). Ver README.
+material/
+
+# Archivos de diseño pesados, por si alguien los deja caer aquí.
+*.psd
+*.ai
+*.indd
+*.cdr
+*.tif
+*.tiff

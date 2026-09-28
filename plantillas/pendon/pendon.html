@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Pendón</title>
+<link rel="stylesheet" href="../../herramientas/fuentes.css">
+<link rel="stylesheet" href="../../herramientas/base.css">
+<script src="../../herramientas/guias.js"></script>
+<style>
+  :root {
+    --tinta: #0f172a;
+    --papel: #fefce8;
+    --acento: #16a34a;
+  }
+
+  /*
+   * UN PENDÓN SE LEE DE LEJOS Y DE PIE.
+   * Titular arriba, a la altura de los ojos; nada importante en los últimos
+   * 20 cm, que quedan tapados por la base del roll-up o por la gente.
+   * Margen de 3 cm: la lona se tensa en tubo y los cantos se enrollan.
+   */
+  .pieza { --sangria: 1cm; --margen: 3cm; font-family: "Inter", sans-serif; color: var(--tinta); }
+  .fondo { background: var(--papel); }
+  .fondo::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0;
+    height: calc(var(--sangria) + 45cm); background: var(--acento);
+  }
+
+  .seguro { display: flex; flex-direction: column; }
+  .marca { font-weight: 600; font-size: 80pt; letter-spacing: .08em; text-transform: uppercase; }
+  h1 {
+    font-family: "Archivo Black", sans-serif; font-weight: 400;
+    font-size: 250pt; line-height: .9; margin-top: 2cm;
+  }
+  .bajada { font-size: 90pt; line-height: 1.2; margin-top: 3cm; max-width: 50cm; }
+  .contacto {
+    /* Termina 20 cm antes del borde de abajo de la zona segura: la base. */
+    margin-top: auto; margin-bottom: 20cm;
+    color: var(--papel); font-family: "Archivo Black", sans-serif; font-size: 120pt; line-height: 1.1;
+  }
+</style>
+</head>
+<body>
+
+<div class="pieza" style="--ancho: 60cm; --alto: 160cm;">
+  <div class="fondo"></div>
+  <div class="seguro">
+    <p class="marca">Negocio</p>
+    <h1>Titular<br>de pendón</h1>
+    <p class="bajada">Una sola idea, que se entienda a cinco metros.</p>
+    <p class="contacto">0414-000-0000<br>@negocio</p>
+  </div>
+</div>
+
+</body>
+</html>

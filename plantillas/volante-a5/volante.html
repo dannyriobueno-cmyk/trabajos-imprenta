@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Volante A5</title>
+<link rel="stylesheet" href="../../herramientas/fuentes.css">
+<link rel="stylesheet" href="../../herramientas/base.css">
+<script src="../../herramientas/guias.js"></script>
+<style>
+  /* Cambia estos cuatro y el volante entero se adapta. */
+  :root {
+    --tinta: #16130f;
+    --papel: #f6f1e7;
+    --acento: #e4572e;
+    --suave: #6b645a;
+  }
+
+  .fondo { background: var(--papel); }
+  /* La franja llega al canto: por eso va en .fondo, que incluye la sangría.
+     Cubre solo el titular: la oferta lleva texto en --acento y encima de la
+     franja desaparecería. */
+  .fondo::before {
+    content: ""; position: absolute; left: 0; right: 0; top: 0;
+    height: calc(var(--sangria) + 5.2cm);
+    background: var(--acento);
+  }
+
+  .seguro {
+    display: flex; flex-direction: column;
+    font-family: "Inter", sans-serif; color: var(--tinta);
+  }
+  .antetitulo {
+    font-weight: 600; font-size: 9pt; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--papel);
+  }
+  h1 {
+    font-family: "Archivo Black", sans-serif; font-weight: 400;
+    font-size: 40pt; line-height: .95; color: var(--papel);
+    margin-top: 2mm;
+  }
+  .oferta {
+    margin-top: 1.6cm;
+    font-family: "Archivo Black", sans-serif; font-size: 22pt; line-height: 1.05;
+  }
+  .oferta span { color: var(--acento); }
+  .texto { margin-top: 5mm; font-size: 10.5pt; line-height: 1.45; color: var(--suave); max-width: 11cm; }
+  .lista { margin-top: 6mm; list-style: none; font-size: 11pt; line-height: 1.7; }
+  .lista li::before { content: "→ "; color: var(--acento); font-weight: 600; }
+
+  .pie {
+    margin-top: auto;
+    display: flex; justify-content: space-between; align-items: end;
+    border-top: .6mm solid var(--tinta); padding-top: 3mm;
+    font-size: 9.5pt; line-height: 1.4;
+  }
+  .pie strong { font-size: 13pt; }
+</style>
+</head>
+<body>
+
+<div class="pieza" style="--ancho: 14.8cm; --alto: 21cm;">
+  <div class="fondo"></div>
+  <div class="seguro">
+    <p class="antetitulo">Nombre del negocio</p>
+    <h1>Titular<br>grande aquí</h1>
+
+    <p class="oferta">Oferta principal<br><span>en una o dos líneas</span></p>
+    <p class="texto">
+      Un párrafo corto que explique por qué le conviene al que lo lee.
+      Dos o tres líneas; en un volante nadie lee más.
+    </p>
+    <ul class="lista">
+      <li>Primer beneficio</li>
+      <li>Segundo beneficio</li>
+      <li>Tercer beneficio</li>
+    </ul>
+
+    <div class="pie">
+      <div><strong>0414-000-0000</strong><br>@negocio</div>
+      <div style="text-align:right">Dirección, ciudad<br>Lun a Sáb · 8 a 6</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

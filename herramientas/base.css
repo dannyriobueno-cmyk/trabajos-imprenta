@@ -1,0 +1,62 @@
+/*
+ * BASE DE TODA PIEZA IMPRESA.
+ *
+ * La pieza se dibuja a su MEDIDA REAL, en cm y mm. No en píxeles: un volante
+ * A5 es `14.8cm × 21cm` y el navegador sabe cuánto es eso. Así la misma receta
+ * sirve a 150 o a 300 ppp sin tocar el diseño — lo decide el exportador.
+ *
+ * Estructura que espera el exportador:
+ *
+ *   <div class="pieza" style="--ancho: 14.8cm; --alto: 21cm; --sangria: 3mm; --margen: 5mm">
+ *     <div class="fondo">…lo que llega al canto (fotos, colores)…</div>
+ *     <div class="seguro">…todo el texto y lo importante…</div>
+ *   </div>
+ *
+ *   .pieza   mide ancho + 2 × sangría. Es lo que se imprime.
+ *   .fondo   ocupa la pieza entera, sangría incluida.
+ *   .seguro  es la zona segura: el corte real menos el margen. Ningún texto
+ *            puede salirse de ella — el exportador lo comprueba y se niega.
+ *
+ * POR QUÉ LA SANGRÍA
+ * La guillotina nunca corta exacto: se corre uno o dos milímetros. Si el fondo
+ * acabara justo en el corte, saldría un filo blanco en algún lado. Por eso el
+ * fondo se pasa 3 mm y el texto se queda 5 mm dentro.
+ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body { background: #777; }
+body { display: grid; place-items: center; min-height: 100vh; padding: 2cm; }
+
+.pieza {
+  --sangria: 3mm;
+  --margen: 5mm;
+  position: relative;
+  width: calc(var(--ancho) + 2 * var(--sangria));
+  height: calc(var(--alto) + 2 * var(--sangria));
+  overflow: hidden;
+  background: #fff;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.fondo { position: absolute; inset: 0; }
+
+.seguro {
+  position: absolute;
+  inset: calc(var(--sangria) + var(--margen));
+}
+
+/*
+ * GUÍAS. Solo se ven al abrir el HTML con ?guias en la dirección, para
+ * revisar a ojo. El exportador nunca las pone: no van a la imprenta.
+ */
+.guias .pieza::after {
+  content: "";
+  position: absolute;
+  inset: var(--sangria);
+  outline: 1px dashed #e0115f;       /* corte */
+  pointer-events: none;
+  z-index: 999;
+}
+.guias .seguro { outline: 1px dotted #0a84ff; }  /* zona segura */
