@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Stickers de libretas · Gabriela Pérez</title>
+<link rel="stylesheet" href="../../../herramientas/fuentes.css">
+<link rel="stylesheet" href="../../../herramientas/base.css">
+<script src="../../../herramientas/guias.js"></script>
+<style>
+  /*
+   * LAS LIBRETAS SON MORADAS.
+   * Un sticker morado sobre libreta morada desaparece. Por eso el fondo es
+   * marfil: contrasta con el morado sin el blanco de oficina, y la tinta es
+   * un ciruela oscuro que conversa con la libreta en vez de pelearse con ella.
+   * El dorado es un tono de tinta normal, no metalizado: no hace falta
+   * hot-stamping para que la línea fina se lea como filete de papelería.
+   */
+  :root {
+    --marfil: #fbf7ef;
+    --ciruela: #4b1f57;
+    --dorado: #ad8a55;
+  }
+
+  body { gap: 1cm; }
+
+  /* ── EL STICKER ─────────────────────────────────────────────────────── */
+  .etiqueta {
+    position: relative;
+    width: 9cm; height: 4cm;
+    background: var(--marfil);
+    color: var(--ciruela);
+  }
+  /* Doble filete: dorado por fuera, ciruela finísimo por dentro. Van a 2 mm
+     del corte, no pegados: si la guillotina se corre, un filete pegado al
+     borde sale cortado en un lado y entero en el otro, y se nota. */
+  .etiqueta::before, .etiqueta::after { content: ""; position: absolute; pointer-events: none; }
+  .etiqueta::before { inset: 2mm; border: .35mm solid var(--dorado); }
+  .etiqueta::after  { inset: 2.9mm; border: .12mm solid var(--ciruela); opacity: .55; }
+
+  .contenido {
+    position: absolute; inset: 4.2mm 6mm;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center;
+    /* hidden a propósito: si un nombre no cabe, el exportador lo detecta
+       como «texto cortado» y se niega, en vez de dejarlo pasar. */
+    overflow: hidden;
+  }
+  .materia {
+    font-family: "Cormorant Garamond", serif; font-weight: 600;
+    font-size: 22pt; line-height: 1; letter-spacing: .01em;
+    white-space: nowrap;
+  }
+  .nombre-grande .materia { font-style: italic; font-weight: 500; font-size: 23pt; }
+
+  .adorno {
+    display: flex; align-items: center; gap: 1.2mm;
+    margin: 2mm 0 1.9mm;
+  }
+  .adorno i { display: block; width: 1cm; height: .25mm; background: var(--dorado); }
+  .adorno b { display: block; width: 1.3mm; height: 1.3mm; background: var(--dorado); transform: rotate(45deg); }
+
+  .alumna {
+    font-family: "Inter", sans-serif; font-weight: 600;
+    font-size: 6.3pt; letter-spacing: .2em; text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  /* ── HOJA CARTA CON LOS DOCE ────────────────────────────────────────── */
+  .hoja .seguro {
+    display: grid; place-content: center;
+    grid-template-columns: repeat(2, 9cm);
+    column-gap: .6cm; row-gap: .4cm;
+  }
+</style>
+</head>
+<body>
+
+<script>
+  const ALUMNA = "Gabriela Pérez";
+  const SECCION = "2do año “B”";
+  const MATERIAS = [
+    "Castellano", "GHC", "Química", "Dibujo técnico", "Matemática", "Biología",
+    "Inglés", "Robótica", "Orientación", "Educación física", "Física",
+  ];
+
+  const adorno = `<div class="adorno"><i></i><b></b><i></i></div>`;
+  const etiqueta = (titulo, pie, clase = "") => `
+    <div class="etiqueta ${clase}"><div class="contenido">
+      <p class="materia">${titulo}</p>${adorno}<p class="alumna">${pie}</p>
+    </div></div>`;
+
+  const piezas = [
+    ...MATERIAS.map((m) => ({ nombre: m, html: etiqueta(m, `${ALUMNA} · ${SECCION}`) })),
+    // La número doce: la hoja tiene dos columnas de seis, y un hueco vacío es
+    // papel pagado. Solo el nombre — sirve para la agenda o la cartuchera.
+    { nombre: "nombre", html: etiqueta(ALUMNA, SECCION, "nombre-grande") },
+  ];
+
+  // Un sticker por archivo, con 2 mm de sangría marfil por si se corre el corte.
+  for (const p of piezas) {
+    document.write(`
+      <div class="pieza" data-nombre="${p.nombre}"
+           style="--ancho: 9cm; --alto: 4cm; --sangria: 2mm; --margen: 0mm;">
+        <div class="fondo" style="background: var(--marfil)"></div>
+        <div class="seguro">${p.html}</div>
+      </div>`);
+  }
+
+  // Y los doce juntos en una carta, para imprimir en papel adhesivo de una vez.
+  document.write(`
+    <div class="pieza hoja" data-nombre="hoja-carta"
+         style="--ancho: 21.59cm; --alto: 27.94cm; --sangria: 0mm; --margen: 0mm;">
+      <div class="fondo"></div>
+      <div class="seguro">${piezas.map((p) => p.html).join("")}</div>
+    </div>`);
+</script>
+
+</body>
+</html>

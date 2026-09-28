@@ -1,0 +1,14 @@
+{
+  "cliente": "Gabriela Pérez",
+  "trabajo": "Stickers de libretas",
+  "medida": "9 x 4 cm",
+  "medidas": {
+    "hoja-carta": "21.59 x 27.94 cm"
+  },
+  "material": "Papel adhesivo (o vinil blanco mate)",
+  "acabado": "Corte recto; laminado mate opcional para que no se ensucien",
+  "cantidad": "12 stickers: 11 materias + 1 solo con el nombre",
+  "caras": "1",
+  "ppp": 300,
+  "notas": "Lo más cómodo: imprimir la hoja-carta en papel adhesivo y cortar. Los archivos sueltos de cada sticker son para plotter de corte o para reponer uno solo."
+}

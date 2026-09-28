@@ -8,5 +8,6 @@ que no se puede es vender la fuente en sí.
 |---|---|---|
 | `archivo-black-*.woff2` | Archivo Black | Omnibus-Type |
 | `inter-*.woff2` | Inter | Rasmus Andersson |
+| `cormorant-garamond-*.woff2` | Cormorant Garamond | Christian Thalmann |
 
 Bajadas de Google Fonts, solo los juegos latinos (español incluido).

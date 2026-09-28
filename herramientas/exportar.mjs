@@ -141,10 +141,13 @@ async function exportarTrabajo(dir) {
       const base = `${slug(ficha.trabajo)}-${p.nombre ? slug(p.nombre) + "-" : ""}${p.ancho}x${p.alto}cm`;
       const problemas = [...p.problemas];
 
-      if (ficha.medida) {
-        const [w, h] = String(ficha.medida).toLowerCase().replace(/cm|\s/g, "").split(/[x×]/).map(Number);
+      // `medidas` da la medida de piezas concretas por su data-nombre (p. ej. la
+      // hoja que junta todos los stickers); las demás usan `medida`.
+      const medida = ficha.medidas?.[p.nombre] ?? ficha.medida;
+      if (medida) {
+        const [w, h] = String(medida).toLowerCase().replace(/cm|\s/g, "").split(/[x×]/).map(Number);
         if (Math.abs(w - p.ancho) > 0.05 || Math.abs(h - p.alto) > 0.05) {
-          problemas.push(`mide ${p.ancho} × ${p.alto} cm y trabajo.json dice ${ficha.medida}`);
+          problemas.push(`mide ${p.ancho} × ${p.alto} cm y trabajo.json dice ${medida}`);
         }
       }
 
@@ -288,6 +291,7 @@ function leeme(f, hechas) {
   l.push(`TRABAJO:   ${f.trabajo}`);
   l.push("");
   l.push(`MEDIDA FINAL (corte):  ${f.medida ?? "(ver cada archivo)"}`);
+  for (const [n, m] of Object.entries(f.medidas ?? {})) l.push(`   · ${n}: ${m}`);
   l.push(`MATERIAL:              ${f.material ?? "—"}`);
   l.push(`ACABADO:               ${f.acabado ?? "—"}`);
   l.push(`CANTIDAD:              ${f.cantidad ?? "—"}`);
